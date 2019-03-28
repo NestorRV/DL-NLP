@@ -98,8 +98,7 @@ def main():
         final_results = pd.concat([tfidf_rnn_results])
 
     if should_compute["calculated_embeddings_rnn"]:
-        ys_calculated_embeddings_rnn = calculated_embeddings_rnn(embeddings_file_path, train_xs, train_ys,
-                                                                 validation_xs, validation_ys)
+        ys_calculated_embeddings_rnn = calculated_embeddings_rnn(train_xs, train_ys, validation_xs, validation_ys)
 
         calculated_embeddings_rnn_results = evaluate(validation_ys, ys_calculated_embeddings_rnn,
                                                      'calculated_embeddings_rnn',
