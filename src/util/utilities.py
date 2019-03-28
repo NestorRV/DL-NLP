@@ -301,8 +301,8 @@ def micro_f1(y_true, y_pred):
     recall = tp / (tp + fn)
     f1 = 2 * precision * recall / (precision + recall)
     f1 = tensorflow.where(tensorflow.is_nan(f1), tensorflow.zeros_like(f1), f1)
-    f1 = tensorflow.reduce_mean(f1)
-    return f1
+    micro_f1 = tensorflow.reduce_mean(f1)
+    return micro_f1
 
 
 def micro_f1_loss(y_true, y_pred):
