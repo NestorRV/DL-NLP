@@ -73,6 +73,22 @@ def main():
 
     final_results = pd.DataFrame
 
+    """
+    ************************************* 
+    Preprocesamiento de datos
+    *************************************
+    """
+
+    preprocessed_train_xs = preprocess_tweets(train_xs)
+    preprocessed_validation_xs = preprocess_tweets(validation_xs)
+    preprocessed_test_xs = preprocess_tweets(test_xs)
+
+    """
+    ************************************* 
+    Modelos 
+    *************************************
+    """
+
     if should_compute["tfidf_rnn"]:
         ys_tfidf_rnn = tfidf_rnn(train_xs, train_ys, validation_xs, validation_ys)
 
@@ -94,22 +110,6 @@ def main():
      A set of embeddings "represents" the vocabulary associated with the language with which we are working.
      If we try to build such vocabulary only with the words present in the training set,
      This will be very poor and may not fit the reality.
-    """
-
-    """
-    ************************************* 
-    Preprocesamiento de datos
-    *************************************
-    """
-
-    preprocessed_train_xs = preprocess_tweets(train_xs)
-    preprocessed_validation_xs = preprocess_tweets(validation_xs)
-    preprocessed_test_xs = preprocess_tweets(test_xs)
-
-    """
-    ************************************* 
-    Modelos 
-    *************************************
     """
 
     if should_compute["ys_pretrain_embeddings_rnn"]:
