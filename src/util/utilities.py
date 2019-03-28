@@ -3,7 +3,9 @@ import time
 import xml.etree.ElementTree
 from collections import OrderedDict
 
+import keras
 import pandas as pd
+import tensorflow
 from matplotlib import pyplot
 from nltk import word_tokenize
 from nltk.corpus import stopwords
@@ -289,3 +291,19 @@ def preprocess_tweets(tweets):
         preprocessed_tweets.append(tweet_words)
 
     return preprocessed_tweets
+
+
+def micro_f1(y_true, y_pred):
+    tp = keras.backend.sum(keras.backend.cast(y_true * y_pred, tensorflow.float32), axis=0)
+    fp = keras.backend.sum(keras.backend.cast((1 - y_true) * y_pred, tensorflow.float32), axis=0)
+    fn = keras.backend.sum(keras.backend.cast(y_true * (1 - y_pred), tensorflow.float32), axis=0)
+    precision = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    f1 = 2 * precision * recall / (precision + recall)
+    f1 = tensorflow.where(tensorflow.is_nan(f1), tensorflow.zeros_like(f1), f1)
+    f1 = tensorflow.reduce_mean(f1)
+    return f1
+
+
+def micro_f1_loss(y_true, y_pred):
+    return 1 - micro_f1(y_true, y_pred)

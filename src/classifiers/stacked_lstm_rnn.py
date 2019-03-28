@@ -46,8 +46,8 @@ def stacked_lstm_rnn(embeddings_path, train_xs, train_ys, test_xs, test_ys=None,
     nn_model.add(LSTM(64))
     nn_model.add(Dense(num_classes, activation='softmax'))
     nn_model.compile(optimizer="adam",
-                     loss="sparse_categorical_crossentropy",
-                     metrics=["accuracy"])
+                     loss=micro_f1_loss,
+                     metrics=[micro_f1])
 
     if verbose == 1:
         print(nn_model.summary())

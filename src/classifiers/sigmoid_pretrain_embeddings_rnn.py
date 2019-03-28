@@ -50,8 +50,8 @@ def sigmoid_pretrain_embeddings_rnn(embeddings_path, train_xs, train_ys, test_xs
     nn_model.add(Flatten())
     nn_model.add(Dense(num_classes, activation='softmax'))
     nn_model.compile(optimizer="adam",
-                     loss="sparse_categorical_crossentropy",
-                     metrics=["accuracy"])
+                     loss=micro_f1_loss,
+                     metrics=[micro_f1])
 
     if verbose == 1:
         print(nn_model.summary())

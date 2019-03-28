@@ -56,7 +56,7 @@ def pretrain_embeddings_LSTM_CONV(embeddings_path, train_xs, train_ys, test_xs, 
     nn_model.add(Flatten())
     nn_model.add(Dense(num_classes, activation='softmax'))
 
-    nn_model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    nn_model.compile(loss=micro_f1_loss, optimizer='adam', metrics=[micro_f1])
 
     if verbose == 1:
         print(nn_model.summary())
