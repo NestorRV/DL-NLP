@@ -42,10 +42,6 @@ def main():
     test_ids = get_ids(test_tweets)
     test_xs = get_xs(test_tweets)
 
-    train_xs = preprocess_tweets(train_xs)
-    validation_xs = preprocess_tweets(validation_xs)
-    test_xs = preprocess_tweets(test_xs)
-
     """ Modelling, Evaluation and Submission """
 
     should_compute = {
